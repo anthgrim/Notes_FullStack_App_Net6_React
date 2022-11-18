@@ -1,0 +1,43 @@
+input,
+textarea {
+  font-size: 18px;
+  padding: 5px;
+}
+
+textarea {
+  max-width: 100%;
+}
+
+.sidebar {
+  padding: 10px;
+  width: 400px;
+  height: 100vh;
+  border-right: 2px solid #ccc;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.checkbox {
+  flex-direction: row;
+}
+
+.button {
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  margin: 10px 0;
+  color: white;
+  background-color: rgb(8, 37, 78);
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.button:hover {
+  transform: translateY(-5px);
+  background-color: rgb(19, 49, 92);
+}

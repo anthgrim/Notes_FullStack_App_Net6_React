@@ -1,0 +1,28 @@
+.note {
+  background-color: #eee;
+  border-radius: 10px;
+  border: none;
+  padding: 30px;
+  width: 25%;
+  height: 100px;
+  height: 200px;
+  max-height: 400px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.description {
+  margin: 10px 0;
+  overflow: auto;
+  overflow-y: scroll;
+  font-size: 13px;
+}
+
+.error {
+  font-size: 13px;
+  color: red;
+}
