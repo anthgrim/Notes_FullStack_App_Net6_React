@@ -82,6 +82,7 @@ const Sidebar = ({ trigger }) => {
         }
       })
       console.log(data)
+      return alert('Note has been added successfully')
     } catch (error) {
       console.log(error)
       return alert('Something went wrong :(')
