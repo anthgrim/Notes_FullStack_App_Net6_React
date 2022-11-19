@@ -10,7 +10,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins, policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "localhost:3000").AllowAnyHeader().AllowAnyMethod();
+        policy.WithOrigins("http://localhost:3000", "localhost:3000", "https://notes-full-stack-app-net6-react.vercel.app").AllowAnyHeader().AllowAnyMethod();
     });
 });
 
