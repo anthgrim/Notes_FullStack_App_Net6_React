@@ -1,7 +1,8 @@
 import './sidebar.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { API_URL } from '../../utils/api'
 
-const Sidebar = ({ trigger }) => {
+const Sidebar = ({ trigger, focusNote, onUpdate }) => {
   const [formData, setFormData] = useState({
     title: {
       value: '',
@@ -15,6 +16,15 @@ const Sidebar = ({ trigger }) => {
       value: true
     }
   })
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      title: { value: focusNote?.title, error: '' },
+      description: { value: focusNote?.description, error: '' },
+      isVisible: { value: focusNote?.isVisible }
+    }))
+  }, [focusNote])
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -58,16 +68,29 @@ const Sidebar = ({ trigger }) => {
         description: description.value,
         isVisible: formData.isVisible.value
       }
-      const response = await fetch('https://localhost:7112/api/note', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
 
-      const data = await response.json()
+      if (!focusNote) {
+        await fetch(`${API_URL}note`, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+        alert('Note has been added successfully')
+      } else {
+        await fetch(`${API_URL}note/${focusNote.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(payload),
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+        alert('Note has been updated successfully')
+      }
+
       trigger()
+      onUpdate(null)
       setFormData({
         title: {
           value: '',
@@ -81,8 +104,7 @@ const Sidebar = ({ trigger }) => {
           value: true
         }
       })
-      console.log(data)
-      return alert('Note has been added successfully')
+      return
     } catch (error) {
       console.log(error)
       return alert('Something went wrong :(')
@@ -131,7 +153,7 @@ const Sidebar = ({ trigger }) => {
 
       <div className='row'>
         <button className='button' onClick={handleSubmit}>
-          Add Note
+          {focusNote ? 'Update Note' : 'Add Note'}
         </button>
       </div>
     </div>

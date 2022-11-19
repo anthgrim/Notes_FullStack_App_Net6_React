@@ -1,9 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using NotesAPI.Data;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "localhost:3000").AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 // Adding Db Context as a service
 builder.Services.AddDbContext<NotesDbContext>(opt => opt.UseSqlServer(
@@ -25,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(policy => policy.WithOrigins("http://localhost:3000", "localhost:3000").AllowAnyHeader().AllowAnyMethod());
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
