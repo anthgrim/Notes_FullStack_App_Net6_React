@@ -7,13 +7,13 @@ This is a fullstack application that allows the user to create, read, update, an
 ## Tech Specifications
 
 - API: .Net 6 with EntityFrameworkCore.SQLServer and EntityFrameworkCore.Tools
-- Database: SQL
+- Database: Azure SQL
 - Client: ReactJS 18
 
 ## Future Adds
 
-- Deployment of API to Azure
-- Deployment of Client to Vercel or Netlify
+- User Sign In and Sign Up
+- Add Authentication with JWTs in API solution
 
 ## License
 
